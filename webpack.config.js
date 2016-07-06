@@ -72,8 +72,9 @@ config = {
                     {
                         test:/\.scss$/,
                         // loaders: ['style', 'css', 'sass']
-                        loader: ExtractTextPlugin.extract("style", "css","sass")
-                    }, 
+                        loader: ExtractTextPlugin.extract("css!sass")
+                        // loaders: ExtractTextPlugin.extract("css","sass")
+                    },
                     {
                         test: /\.(woff|woff2|ttf|eot|svg)(\?t=[0-9]\.[0-9]\.[0-9])?$/,
                         loader: 'file-loader?name=_fonts/[name].[ext]'

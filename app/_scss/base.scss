@@ -9,6 +9,7 @@ body{
 
 
 @font-face {font-family: "iconfont";
+  src: url('../_fonts/iconfont.eot'); /* IE9*/
   src: url('../_fonts/iconfont.eot') format('embedded-opentype'), /* IE6-IE8 */
   url('../_fonts/iconfont.woff') format('woff'), /* chrome, firefox */
   url('../_fonts/iconfont.ttf') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
