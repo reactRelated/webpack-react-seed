@@ -58,6 +58,7 @@ config = {
     },
     output: {
         path: path.join(__dirname, './dist'),
+        publicPath:"/webpack-react-seed/dist/",
        filename: jsBundle
     },
     module: {
