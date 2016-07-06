@@ -75,11 +75,11 @@ config = {
                         loader: ExtractTextPlugin.extract("style", "css","sass")
                     }, 
                     {
-                        test: /\.(woff|woff2|ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-                        loader: 'file-loader?name=fonts/[name].[ext]'
+                        test: /\.(woff|woff2|ttf|eot|svg)(\?t=[0-9]\.[0-9]\.[0-9])?$/,
+                        loader: 'file-loader?name=_fonts/[name].[ext]'
                     }, {
                         test: /\.(png|jpe?g|gif)$/,
-                        loader: 'url-loader?limit=8192&name=imgs/[name]-[hash].[ext]'
+                        loader: 'url-loader?limit=8192&name=_images/[name]-[hash].[ext]'
                     }
                 ],
                 noParse: [pathToReact]
