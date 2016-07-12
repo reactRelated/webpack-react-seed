@@ -34,12 +34,10 @@ var sourceJsx = suffix(source,'*.jsx');
 // 获取js
 var entries = getEntry(sourceJsx, 'app/');
 
-// var page = getEntry(sourceHtml, 'app/');
 //获取 html 多模块入口文件
 var pages = Object.keys(entries);
 
-// console.log(entries);
-// console.log(pages);
+console.log(pages);
 
 config = {
     devServer: {
@@ -49,7 +47,11 @@ config = {
     // context: path.join(__dirname, './app'),
     // devtool : "source-map",
     // entry: ['webpack/hot/only-dev-server', './app/main.jsx'],
-    entry: entries,
+    entry: Object.assign(entries, {
+        // 用到什么公共的库，就把它加进common去，目的是将公用库单独提取打包
+        'common': ['react','react-dom']
+    }),
+    // entry:entries,
     resolve: {
         alias: {
          'react': pathToReact,
@@ -84,17 +86,23 @@ config = {
                         loader: 'url-loader?limit=8192&name=_images/[name]-[hash].[ext]'
                     }
                 ],
-                noParse: [pathToReact]
+                noParse: [pathToReact]//不解析的模块???还不是很懂
         },
     plugins: [
             new webpack.HotModuleReplacementPlugin(),
+            //提取css
             new ExtractTextPlugin(cssBundle, {
                 allChunks: true
             }),
+            //全局加载 的类
+            new webpack.ProvidePlugin({
+                React: 'react',
+                ReactDom:'react-dom'
+            }),
             new webpack.optimize.CommonsChunkPlugin({
-                name: 'common', // 将公共模块提取，生成名为`vendors`的chunk
-                chunks: ['home/index','home/order','product/index'], //提取哪些模块共有的部分
-                minChunks: 3 // 提取至少3个模块共有的部分
+                name: 'common', // 将公共模块提取，生成名为`common`的chunk
+                chunks: pages, //提取哪些模块共有的部分
+                minChunks: pages.length
             })
         ]
 };
